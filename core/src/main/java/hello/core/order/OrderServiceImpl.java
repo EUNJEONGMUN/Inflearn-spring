@@ -6,7 +6,10 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService{
 
     private final MemberRepository memberRepository;
@@ -22,6 +25,8 @@ public class OrderServiceImpl implements OrderService{
     private final DiscountPolicy discountPolicy; //
     // OrderService 입장에서는 discountpolicy에 fixdiscountpolicy가 들어올지, ratediscountpolicy가 들어올지 전혀 알 수 없음
     // 추상에만 의존하고 있음
+
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
