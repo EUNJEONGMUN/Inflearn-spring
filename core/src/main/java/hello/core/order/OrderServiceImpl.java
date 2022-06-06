@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderServiceImpl implements OrderService{
 
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 //    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
 //    private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
 
@@ -22,24 +22,14 @@ public class OrderServiceImpl implements OrderService{
      * DIP 위반 -> 추상에만 의존하도록 변경(인터페이스에만 의존)
      * DIP를 위반하지 않도록 인터페이스에만 의존하도록 의존 관계를 변경하면 된다.
      */
-    private DiscountPolicy discountPolicy; //
+    private final DiscountPolicy discountPolicy; //
     // OrderService 입장에서는 discountpolicy에 fixdiscountpolicy가 들어올지, ratediscountpolicy가 들어올지 전혀 알 수 없음
     // 추상에만 의존하고 있음
-
     @Autowired
-    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
-    @Autowired
-    public void setMemberRepository(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
-
-    //    @Autowired
-//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-//        this.memberRepository = memberRepository;
-//        this.discountPolicy = discountPolicy;
-//    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
