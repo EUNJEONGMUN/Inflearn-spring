@@ -29,7 +29,7 @@ public class OrderServiceImpl implements OrderService{
     // OrderService 입장에서는 discountpolicy에 fixdiscountpolicy가 들어올지, ratediscountpolicy가 들어올지 전혀 알 수 없음
     // 추상에만 의존하고 있음
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
