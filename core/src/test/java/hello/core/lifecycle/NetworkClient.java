@@ -6,8 +6,6 @@ public class NetworkClient {
 
     public NetworkClient() {
         System.out.println("생성자 호출, url = "+url);
-        connect();
-        call("초기화 연결 메시지");
     }
 
     public void setUrl(String url) {
@@ -24,5 +22,17 @@ public class NetworkClient {
 
     public void disconnect() {
         System.out.println("close = " + url);
+    }
+
+    public void init() {
+        // afterPropertiesSet : 의존 관계 주입이 끝나면 호출하겠다는 뜻
+        System.out.println("NetworkClient.init");
+        connect();
+        call("초기화 연결 메시지");
+    }
+
+    public void close(){
+        System.out.println("NetworkClient.close");
+        disconnect();
     }
 }
