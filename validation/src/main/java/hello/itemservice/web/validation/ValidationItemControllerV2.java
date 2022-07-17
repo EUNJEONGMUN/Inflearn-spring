@@ -29,12 +29,12 @@ public class ValidationItemControllerV2 {
     private final ItemRepository itemRepository;
     private final ItemValidator itemValidator;
 
-/*
+
     @InitBinder // 컨트롤러 호출 시마다
     public void init(WebDataBinder dataBinder) {
         dataBinder.addValidators(itemValidator);
     }
-*/
+
 
     @GetMapping
     public String items(Model model) {
